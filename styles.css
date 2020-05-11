@@ -22,16 +22,9 @@ input{
     text-decoration: underline;
 }
 
-.userContainer{
+.usersContainer{
     display: flex;
     flex-direction: column;
-    width: 100%;
-}
-
-.usersHeaderContainer{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
     width: 100%;
 }
 
@@ -43,26 +36,36 @@ input{
     margin-bottom: 1%;
 }
 
+.usersHeaderContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+tr{
+    width: 100%;
+}
+
 img{
     border-radius: 50%;
     height: 75px;
 }
 
-.imgColumn{
+.imgcol{
     margin-right: 2%;
 }
-.firstNameColumn{
+.fnCol{
     width: 15%;
     padding: 30px 0;
 }
-.lastNameColumn{
+.lnCol{
     width: 15%;
     padding: 30px 0;
 }
-.emailColumn{
+.emailCol{
     width: 40%;
     padding: 30px 0;
 }
-.titleColumn{
+.titleCol{
     padding: 30px 0;
 }

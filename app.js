@@ -7,6 +7,7 @@ const state = {
 
 const create = (type) => document.createElement(type);
 
+// Creating header
 const header = create('h1');
 header.innerText = 'Acme User Search';
 header.classList.add('header');
@@ -21,6 +22,10 @@ const createInputForForm = () => {
     let timeout = null;
     input.addEventListener('keyup', ev => {
         state.term = ev.target.value;
+        window.location.hash = `?input=${state.term}`;
+        if (state.term == '') {
+            window.location.hash = ``;
+        }
         clearTimeout(timeout);
         timeout = setTimeout(() => {
             render();
@@ -48,6 +53,7 @@ const reset = () => {
     let input  = document.querySelector('input[name=input]');
     input.value = '';
     state.term = '';
+    window.location.hash = ``;
     state.users = [];
     render();
 };
@@ -67,72 +73,77 @@ const createForm = () => {
 const mainForm = createForm();
 app.append(mainForm);
 
-const usersContainer = create('div');
-usersContainer.classList.add('userContainer');
+const usersContainer = create('table');
+usersContainer.classList.add('usersContainer');
 app.append(usersContainer);
 
 const creatUsersHeader = () => {
-    const usersHeaderContainer = create('div');
+    const usersHeaderContainer = create('thead');
     usersHeaderContainer.classList.add('usersHeaderContainer');
     usersContainer.append(usersHeaderContainer);
 
-    const headerImg = create('img');
-    headerImg.setAttribute('src','https://www.richelieu.com/documents/docsGr/106/284/2/1062842/1296075_300.jpg')
-    headerImg.setAttribute('style', 'visibility: hidden;')
-    headerImg.classList.add('imgColumn');
-    usersHeaderContainer.append(headerImg);
+    const headerRow = create('tr');
+    usersHeaderContainer.append(headerRow);
 
-    const headerFirstName = create('h3');
-    headerFirstName.classList.add('firstNameColumn');
-    headerFirstName.innerText = 'First Name'
-    usersHeaderContainer.append(headerFirstName);
+    const headerImgTb = create('th');
+    headerImgTb.classList.add('imgCol');
+    headerImgTb.innerText = 'Img';
+    headerImgTb.setAttribute('style', 'color: white;')
+    headerRow.append(headerImgTb);
 
-    const headerLastName = create('h3');
-    headerLastName.classList.add('lastNameColumn');
-    headerLastName.innerText = 'Last Name'
-    usersHeaderContainer.append(headerLastName);
+    const headerFirstName = create('th');
+    headerFirstName.classList.add('fnCol');
+    headerFirstName.innerText = 'First Name';
+    headerRow.append(headerFirstName);
 
-    const headerEmail = create('h3');
-    headerEmail.classList.add('emailColumn');
-    headerEmail.innerText = 'Email'
-    usersHeaderContainer.append(headerEmail);
+    const headerLastName = create('th');
+    headerLastName.classList.add('lnCol');
+    headerLastName.innerText = 'Last Name';
+    headerRow.append(headerLastName);
 
-    const headerTitle = create('h3');
-    headerTitle.classList.add('titleColumn');
-    headerTitle.innerText = 'Title'
-    usersHeaderContainer.append(headerTitle);
+    const headerEmail = create('th');
+    headerEmail.classList.add('emailCol');
+    headerEmail.innerText = 'Email';
+    headerRow.append(headerEmail);
 
-    usersContainer.append(usersHeaderContainer);
+    const headerTitle = create('th');
+    headerTitle.classList.add('titleCol');
+    headerTitle.innerText = 'Title';
+    headerRow.append(headerTitle);
+
     return usersHeaderContainer;
 };
 
 const createUser = (user) => {
-    const userElement = create('div');
+    const userElement = create('tr');
     userElement.classList.add('user');
 
+    const userImgTb = create('tb');
+    userImgTb.classList.add('imgCol');
+    userElement.append(userImgTb);
+    
     const userImg = create('img');
     userImg.setAttribute('src', user.avatar);
-    userImg.classList.add('imgColumn');
-    userElement.append(userImg);
+    userImgTb.append(userImg);
     
-    const userName = create('div');
+    const userName = create('tb');
+    userName.classList.add('fnCol');
     userName.innerText = `${user.firstName}`;
-    userName.classList.add('firstNameColumn');
     userElement.append(userName);
 
-    const userLastName = create('div');
+    const userLastName = create('tb');
+    userLastName.classList.add('lnCol');
     userLastName.innerText = `${user.lastName}`;
-    userLastName.classList.add('lastNameColumn');
     userElement.append(userLastName);
 
-    const userEmail = create('div');
+    const userEmail = create('tb');
+    userEmail.classList.add('emailCol');
     userEmail.innerText = `${user.email}`;
-    userEmail.classList.add('emailColumn');
     userElement.append(userEmail);
 
-    const userTitle = create('div');
+    const userTitle = create('tb');
+    userTitle.classList.add('titleCol');
     userTitle.innerText = `${user.title}`;
-    userTitle.classList.add('titleColumn');
     userElement.append(userTitle);
 
     return userElement;
