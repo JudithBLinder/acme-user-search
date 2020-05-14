@@ -85,11 +85,9 @@ const creatUsersHeader = () => {
     const headerRow = create('tr');
     usersHeaderContainer.append(headerRow);
 
-    const headerImgTb = create('th');
-    headerImgTb.classList.add('imgCol');
-    headerImgTb.innerText = 'Img';
-    headerImgTb.setAttribute('style', 'color: white;')
-    headerRow.append(headerImgTb);
+    const headerImgtd = create('th');
+    headerImgtd.classList.add('imgCol');
+    headerRow.append(headerImgtd);
 
     const headerFirstName = create('th');
     headerFirstName.classList.add('fnCol');
@@ -118,30 +116,30 @@ const createUser = (user) => {
     const userElement = create('tr');
     userElement.classList.add('user');
 
-    const userImgTb = create('tb');
-    userImgTb.classList.add('imgCol');
-    userElement.append(userImgTb);
+    const userImgtd = create('td');
+    userImgtd.classList.add('imgCol');
+    userElement.append(userImgtd);
     
     const userImg = create('img');
     userImg.setAttribute('src', user.avatar);
-    userImgTb.append(userImg);
+    userImgtd.append(userImg);
     
-    const userName = create('tb');
+    const userName = create('td');
     userName.classList.add('fnCol');
     userName.innerText = `${user.firstName}`;
     userElement.append(userName);
 
-    const userLastName = create('tb');
+    const userLastName = create('td');
     userLastName.classList.add('lnCol');
     userLastName.innerText = `${user.lastName}`;
     userElement.append(userLastName);
 
-    const userEmail = create('tb');
+    const userEmail = create('td');
     userEmail.classList.add('emailCol');
     userEmail.innerText = `${user.email}`;
     userElement.append(userEmail);
 
-    const userTitle = create('tb');
+    const userTitle = create('td');
     userTitle.classList.add('titleCol');
     userTitle.innerText = `${user.title}`;
     userElement.append(userTitle);
